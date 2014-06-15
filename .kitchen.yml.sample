@@ -1,0 +1,32 @@
+---
+driver:
+  name: vagrant
+  vm_hostname: metadata-service
+  customize:
+    name: metadata-service
+    memory: 1024
+    cpus: 1
+  network:
+    - ["forwarded_port", {guest: 80, host: 10080, id: "web"}]
+    - ["forwarded_port", {guest: 22, host: 10022, id: "ssh"}]
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: ubuntu-12.04
+
+suites:
+  - name: metadata-service
+    run_list:
+      - recipe[metadata-service-cb::default]
+    attributes: {
+      "java": {
+          "jdk_version": "7",
+          "install_flavor": "openjdk"
+      },
+      "github": {
+        "username": "",
+        "password": ""
+      }
+    }
