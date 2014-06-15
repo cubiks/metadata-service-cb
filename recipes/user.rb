@@ -13,9 +13,9 @@ directory "/home/chef/.ssh" do
   action  :create
 end
 
-cookbook_file "/home/chef/.ssh/id_rsa" do
-  source  "ssh/id_rsa"
-  owner   "chef"
-  group   "chef"
-  mode 0600
-end
+#cookbook_file "/home/chef/.ssh/id_rsa" do
+#  source  "ssh/id_rsa"
+#  owner   "chef"
+#  group   "chef"
+#  mode 0600
+#end

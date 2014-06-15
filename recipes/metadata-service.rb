@@ -4,4 +4,13 @@ git "/home/chef/metadata" do
   action :sync
   user "chef"
   group "chef"
+  notifies :run, "bash[metadata-service-package]", :immediately
+end
+
+bash "metadata-service-package" do
+  cwd   "/home/chef/metadata"
+  user  "chef"
+  code <<-EOH
+    mvn package
+  EOH
 end
